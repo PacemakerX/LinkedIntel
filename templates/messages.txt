@@ -1,0 +1,17 @@
+# templates/messages.txt
+
+Hi {name},
+
+I noticed we both share an interest in {interest}. I'd love to connect and discuss more about this!
+
+Best regards,
+{your_name}
+
+---
+
+Hey {name},
+
+I saw your post about {topic} and wanted to reach out. I think we could have some great discussions around this. Let’s connect!
+
+Looking forward to hearing from you,
+{your_name}

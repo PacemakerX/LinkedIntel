@@ -1,0 +1,14 @@
+# Web automation
+selenium==4.10.0
+webdriver-manager==4.0.0
+
+# AI integration
+openai==0.28.1
+
+# Utilities
+requests==2.31.0
+python-dotenv==1.0.0
+schedule==1.2.0
+
+# Data handling
+pandas==2.0.3

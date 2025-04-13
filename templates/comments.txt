@@ -1,0 +1,11 @@
+# templates/comments.txt
+
+Great post, {author}! Really loved your insights on {topic}. Looking forward to more of these!
+
+---
+
+I totally agree with your points, {author}. {specific_point} really resonated with me. Keep sharing such valuable content!
+
+---
+
+Thanks for sharing this, {author}. It's great to see such thoughtful content on {subject}. Keep it up!
