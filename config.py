@@ -11,10 +11,9 @@ TEMPLATES_DIR = ROOT_DIR / "templates"
 LINKEDIN_LOGIN_URL = "https://www.linkedin.com/login"
 LINKEDIN_FEED_URL = "https://www.linkedin.com/feed/"
 
-# OpenAI Configuration
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")  # Set this in your environment variables for security
-OPENAI_MODEL = "gpt-4"  # or "gpt-3.5-turbo" for a more cost-effective option
+# Google Gemini Configuration
 
+GEMINI_API_KEY= os.environ.get("GEMINI_API_KEY","")
 # Browser settings
 HEADLESS_MODE = False  # Set to True to run browser in background
 
@@ -31,5 +30,5 @@ MIN_SCROLL_DELAY = 1.0
 MAX_SCROLL_DELAY = 3.0
 
 # Feed scraping settings
-MAX_POSTS_TO_SCRAPE = 30
+MAX_POSTS_TO_SCRAPE = 2
 MAX_SCROLL_ITERATIONS = 10
