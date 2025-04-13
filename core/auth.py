@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from ..config import LINKEDIN_LOGIN_URL, DATA_DIR
+from config import LINKEDIN_LOGIN_URL, DATA_DIR
 
 class LinkedInAuth:
     def __init__(self):

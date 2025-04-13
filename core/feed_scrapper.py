@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-from ..config import (
+from config import (
     LINKEDIN_FEED_URL, 
     MAX_POSTS_TO_SCRAPE, 
     MAX_SCROLL_ITERATIONS,

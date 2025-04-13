@@ -5,8 +5,8 @@ import os
 from pathlib import Path
 import openai
 
-from ..config import OPENAI_API_KEY, OPENAI_MODEL, DATA_DIR
-from ..utils.parser import parse_ai_response
+from config import OPENAI_API_KEY, OPENAI_MODEL, DATA_DIR
+from utils.parser import parse_ai_response
 
 # Set OpenAI API key from config
 openai.api_key = OPENAI_API_KEY

@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
-from ..config import (
+from config import (
     DATA_DIR,
     MIN_ACTION_DELAY,
     MAX_ACTION_DELAY
