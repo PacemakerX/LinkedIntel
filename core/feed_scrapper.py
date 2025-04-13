@@ -1,4 +1,3 @@
-# core/feed_scraper.py
 import time
 import random
 from selenium.webdriver.common.by import By
@@ -63,7 +62,12 @@ class FeedScraper:
                     if post_data and post_data["post_text"].strip():
                         posts.append(post_data)
                         print(f"Scraped post #{len(posts)}")
-                        
+                        print(f"👤 Author: {post_data['author_name']}")
+                        print(f"🔗 Profile: {post_data['author_link']}")
+                        print(f"📝 Text: {post_data['post_text'][:200]}{'...' if len(post_data['post_text']) > 200 else ''}")
+                        print(f"🔗 Post URL: {post_data['post_url']}")
+
+                        # Stop scraping if we reach the max number of posts
                         if len(posts) >= MAX_POSTS_TO_SCRAPE:
                             break
                 except Exception as e:
@@ -91,16 +95,36 @@ class FeedScraper:
         try:
             # Extract post ID
             post_id = post_element.get_attribute("data-urn")
-            
+            author_name = "Unknown"
+            author_link = ""
+
             # Extract author info
             try:
-                author_element = post_element.find_element(By.CSS_SELECTOR, ".feed-shared-actor__name")
-                author_name = author_element.text.strip()
-                author_link = author_element.find_element(By.TAG_NAME, "a").get_attribute("href")
+                author_container = post_element.find_element(
+                    By.CSS_SELECTOR,
+                    "a.update-components-actor__meta-link"
+                )
+                author_link = author_container.get_attribute("href").strip()
+
+                # Try to get the author name
+                try:
+                    author_name_span = author_container.find_element(
+                        By.CSS_SELECTOR,
+                        ".update-components-actor__title span span[aria-hidden='true']"
+                    )
+                    extracted_name = author_name_span.text.strip()
+                    if extracted_name:
+                        author_name = extracted_name
+                except NoSuchElementException:
+                    # Fallback: extract name from the profile URL if name is not found
+                    if "linkedin.com/in/" in author_link:
+                        name_part = author_link.split("linkedin.com/in/")[1].split("?")[0]
+                        author_name = name_part.replace("-", " ").title()
+
             except NoSuchElementException:
                 author_name = "Unknown"
                 author_link = ""
-            
+
             # Extract post text
             try:
                 text_element = post_element.find_element(By.CSS_SELECTOR, ".feed-shared-update-v2__description")
@@ -112,7 +136,7 @@ class FeedScraper:
                     post_text = text_element.text.strip()
                 except NoSuchElementException:
                     post_text = ""
-            
+
             # Extract post URL
             try:
                 post_url_element = post_element.find_element(By.CSS_SELECTOR, ".feed-shared-update-v2__update-link-container a")
@@ -124,7 +148,7 @@ class FeedScraper:
                     post_url = f"https://www.linkedin.com/feed/update/urn:li:activity:{activity_id}"
                 else:
                     post_url = ""
-            
+
             return {
                 "post_id": post_id,
                 "author_name": author_name,
@@ -133,7 +157,7 @@ class FeedScraper:
                 "post_url": post_url,
                 "post_element": post_element  # Keep reference to the actual element for interactions
             }
-            
+
         except Exception as e:
             print(f"Error extracting data from post: {e}")
             return None
