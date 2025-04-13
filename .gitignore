@@ -11,4 +11,5 @@
 /action_engine.log
 
 # Data
-/data
+/data/cookies.json
+/data/history.json
