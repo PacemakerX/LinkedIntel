@@ -11,15 +11,10 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 from config import (
     DATA_DIR, 
-    OPENAI_API_KEY, 
-    OPENAI_MODEL,
     MIN_ACTION_DELAY,
     MAX_ACTION_DELAY,
     MAX_MESSAGES_PER_DAY
 )
-
-# Set OpenAI API key from config
-openai.api_key = OPENAI_API_KEY
 
 class LinkedInMessenger:
     def __init__(self):
@@ -248,23 +243,6 @@ class LinkedInMessenger:
         
         return refined_message
 
-    def _refine_message_with_openai(self, message, connection_data):
-        """Use OpenAI API to refine or personalize the message"""
-        try:
-            prompt = f"Refine the following message to sound more engaging and professional: {message}"
-            response = openai.Completion.create(
-                model=OPENAI_MODEL,
-                prompt=prompt,
-                max_tokens=150,
-                n=1,
-                stop=None,
-                temperature=0.7
-            )
-            refined_message = response.choices[0].text.strip()
-            return refined_message
-        except Exception as e:
-            print(f"Error generating message with OpenAI: {e}")
-            return message  # Fallback to the original message if OpenAI fails
     
     def _record_message(self, connection_data, message_text):
         """Record the sent message in the action history"""
