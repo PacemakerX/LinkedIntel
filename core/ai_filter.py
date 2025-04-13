@@ -1,15 +1,10 @@
-# core/ai_filter.py
 import json
-import time
-import os
 from pathlib import Path
-import openai
 
-from config import OPENAI_API_KEY, OPENAI_MODEL, DATA_DIR
+from config import  DATA_DIR,GEMINI_API_KEY
 from utils.parser import parse_ai_response
-
-# Set OpenAI API key from config
-openai.api_key = OPENAI_API_KEY
+from google import genai
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 class AIFilter:
     def __init__(self):
@@ -51,19 +46,14 @@ class AIFilter:
         prompt = self._create_prompt(author_name, post_text)
         
         try:
-            # Call OpenAI API
-            response = openai.ChatCompletion.create(
-                model=OPENAI_MODEL,
-                messages=[
-                    {"role": "system", "content": "You are an AI assistant that helps decide how to interact with LinkedIn posts."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.7,
-                max_tokens=500
+            print(f"Google api : {GEMINI_API_KEY}")
+            response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt
             )
-            
+            print(response.text)
             # Extract and parse response
-            ai_response = response.choices[0].message.content
+            ai_response = response.text
             analysis_result = parse_ai_response(ai_response)
             
             # Cache the result
@@ -73,10 +63,10 @@ class AIFilter:
             return analysis_result
             
         except Exception as e:
-            print(f"Error analyzing post with OpenAI: {e}")
+            print(f"\n Error analyzing post with Google Gemini: {e}")
             return {
-                "should_like": False,
-                "should_comment": False,
+                "should_like": "No",
+                "should_comment": "No",
                 "comment_text": "",
                 "reasoning": f"Error: {str(e)}"
             }
@@ -100,7 +90,7 @@ Based on this post, please answer the following questions:
 Format your response exactly like this:
 LIKE: Yes/No
 COMMENT: Yes/No
-COMMENT_TEXT: [Your suggested comment if applicable]
+COMMENT_TEXT: [Your suggested comment if applicable keep the comment short and brief]
 REASONING: [Your reasoning for these decisions]
 
 The comment should be professional, relevant to the post content, and add value to the conversation. It should sound natural and human-written, not generic or bot-like.
