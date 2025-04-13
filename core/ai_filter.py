@@ -46,7 +46,6 @@ class AIFilter:
         prompt = self._create_prompt(author_name, post_text)
         
         try:
-            print(f"Google api : {GEMINI_API_KEY}")
             response = client.models.generate_content(
             model="gemini-2.0-flash",
             contents=prompt
@@ -91,7 +90,7 @@ Format your response exactly like this:
 LIKE: Yes/No
 COMMENT: Yes/No
 COMMENT_TEXT: [Your suggested comment if applicable keep the comment short and brief]
-REASONING: [Your reasoning for these decisions]
+REASONING: [Your reasoning for these decisions , single line reasoning]
 
 The comment should be professional, relevant to the post content, and add value to the conversation. It should sound natural and human-written, not generic or bot-like.
 """
