@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Import project modules
-from config import HEADLESS_MODE, MAX_POSTS_TO_SCRAPE,OPENAI_API_KEY,GEMINI_API_KEY
+from config import HEADLESS_MODE, MAX_POSTS_TO_SCRAPE
 from core.auth import LinkedInAuth
 from core.feed_scrapper import FeedScraper
 from core.ai_filter import AIFilter
