@@ -60,10 +60,6 @@ class LinkedInAuth:
                 except Exception as e:
                     print(f"Error adding cookie: {e}")
             
-            # Navigate to feed to check if login was successful
-            driver.get("https://www.linkedin.com/feed/")
-            time.sleep(random.uniform(2, 4))
-            
             # Check if we're logged in by looking for the feed
             if "feed" in driver.current_url:
                 print("Successfully logged in with cookies!")
