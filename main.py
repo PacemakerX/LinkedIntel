@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Import project modules
-from config import HEADLESS_MODE, MAX_POSTS_TO_SCRAPE
+from config import HEADLESS_MODE, MAX_POSTS_TO_SCRAPE,OPENAI_API_KEY,GEMINI_API_KEY
 from core.auth import LinkedInAuth
 from core.feed_scrapper import FeedScraper
 from core.ai_filter import AIFilter
@@ -26,7 +26,9 @@ def setup_driver():
     options.add_argument("--start-maximized")
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-extensions")
-    
+    options.add_argument("--ignore-certificate-errors")  # Add this line to ignore SSL errors
+    options.add_argument("--allow-insecure-localhost")  # Allow insecure localhost connections (optional)
+    options.add_argument("--incognito")  # Use incognito mode
     # Use webdriver_manager to automatically handle ChromeDriver
     service = Service(ChromeDriverManager().install())
     
