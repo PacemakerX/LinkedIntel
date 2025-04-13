@@ -14,9 +14,6 @@ A powerful Python-based automation tool that enhances your LinkedIn experience b
 [![Firefox](https://img.shields.io/badge/Firefox-FF7139?logo=Firefox&logoColor=white)](#)
 
 ## 🚀 Features
-
-- 🔗 **Automated Connection Requests**: Send personalized connection requests to targeted professionals.
-- 💬 **Message Automation**: Schedule and send tailored messages to your network.
 - 👍 **Engagement Boost**: Automatically engage with posts from your network through likes and comments.
 - 🤖 **AI-Powered Interactions**: Leverage Google Gemini to create natural, personalized messages.
 - 🔄 **Session Management**: Utilize cookies for seamless authentication and session persistence.
@@ -38,8 +35,8 @@ A powerful Python-based automation tool that enhances your LinkedIn experience b
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/linkedin-automation.git
-cd linkedin-automation
+git clone https://github.com/PacemakerX/LinkedIntel.git
+cd LinkedIntel
 
 # Set up virtual environment
 python -m venv venv
