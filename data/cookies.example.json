@@ -1,0 +1,29 @@
+[
+  {
+    "name": "li_at",
+    "value": "YOUR_LI_AT_COOKIE",
+    "domain": ".linkedin.com",
+    "path": "/",
+    "secure": true,
+    "httpOnly": true,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "li_sugr",
+    "value": "YOUR_LI_SUGR_COOKIE",
+    "domain": ".linkedin.com",
+    "path": "/",
+    "secure": true,
+    "httpOnly": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "lidc",
+    "value": "YOUR_LIDC_COOKIE",
+    "domain": ".linkedin.com",
+    "path": "/",
+    "secure": true,
+    "httpOnly": false,
+    "sameSite": "Strict"
+  }
+]
