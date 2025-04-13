@@ -1,4 +1,3 @@
-
 <img src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-White-Dark-Background-Logo.wine.svg" alt="LinkedIn Automation" style="width:100%; height:300px; object-fit: cover;">
 <br><br>
 
@@ -97,9 +96,11 @@ python main.py
 
 ## Link to the Repository:
 
+<p align="center">
 <a href="https://github.com/PacemakerX/LinkedIntel.git">
   <img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/993370af-11f4-48e7-9e0d-e5b79c2e7890" alt="Website Link" style="width:100%; height:300px; object-fit: cover;">
 </a>
+<p>
 
 ## Feel free to connect with me!
 
