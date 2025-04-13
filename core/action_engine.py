@@ -147,52 +147,48 @@ class ActionEngine:
 
     def comment_on_post(self, driver, post_element, comment_text):
         try:
-            comment_buttons = post_element.find_elements(
-                By.CSS_SELECTOR, "button.comment-button, button[data-control-name='comment']"
+            # Step 1: Click on the post's comment button
+            comment_button = post_element.find_element(
+                By.CSS_SELECTOR, "button.comment-button, button[data-control-name='comment']")
+            driver.execute_script("arguments[0].scrollIntoView(true);", comment_button)
+            self._random_delay(0.3, 0.6)
+            driver.execute_script("arguments[0].click();", comment_button)
+
+            self._random_delay(1, 1.5)
+
+            # Step 2: Now find the ql-editor INSIDE this post_element (not the whole page!)
+            comment_field = WebDriverWait(post_element, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "div.ql-editor"))
             )
-            clicked = False
-            for btn in comment_buttons:
-                if btn.is_displayed():
-                    driver.execute_script("arguments[0].click();", btn)
-                    clicked = True
-                    break
 
-            if not clicked:
-                print("❌ No visible comment button found")
-                return False
-
-            self._random_delay(0.8, 1.4)
-
-            # Wait for comment box to appear
-            comment_field = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "div.ql-editor"))
-            )
+            driver.execute_script("arguments[0].focus();", comment_field)
             for char in comment_text:
                 comment_field.send_keys(char)
-                time.sleep(random.uniform(0.01, 0.05))
+                time.sleep(random.uniform(0.01, 0.04))
 
             self._random_delay(1, 2)
 
-            # Try locating the submit button in modal / page instead of post_element
+            # Step 3: Find the submit button only within this post element
             try:
-                post_button = driver.find_element(
-                    By.CSS_SELECTOR, "button.comments-comment-box__submit-button, button.comment-button"
+                post_button = post_element.find_element(
+                    By.CSS_SELECTOR, "button.comments-comment-box__submit-button--cr"
                 )
             except NoSuchElementException:
-                print("❌ Submit button not found in main DOM either")
+                print("❌ Submit button not found inside post_element")
                 return False
 
             driver.execute_script("arguments[0].scrollIntoView(true);", post_button)
             self._random_delay(0.3, 0.6)
             driver.execute_script("arguments[0].click();", post_button)
 
-            self._random_delay(2, 4)
+            self._random_delay(2, 3)
             print(f"✅ Posted comment: {comment_text[:30]}...")
             return True
 
         except Exception as e:
             print(f"❌ Error commenting on post: {e}")
             return False
+
 
 
     def _reposition_post(self, driver, post_element):
