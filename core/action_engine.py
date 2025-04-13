@@ -65,19 +65,20 @@ class ActionEngine:
         try:
             self._reposition_post(driver, post_element)
 
-            # Like the post
-            if analysis_result.get("should_like", False) and not self.has_interacted_with_post(post_id, "likes"):
+            # LIKE
+            should_like = bool(analysis_result.get("should_like", False))
+            if should_like and not self.has_interacted_with_post(post_id, "likes"):
                 print(f"Analysis recommends liking post: {post_id}")
                 if self.like_post(driver, post_element):
                     results["liked"] = True
                     self.record_interaction(post_id, "likes")
                     self._random_delay(1, 2)
             else:
-                print(f"Skipping like for post: {post_id}")
+                print(f"Skipping like for post: {post_id}, should_like={should_like}")
 
-            # Comment
+            # COMMENT
             comment_text = analysis_result.get("comment_text", "")
-            should_comment = analysis_result.get("should_comment", False)
+            should_comment = bool(analysis_result.get("should_comment", False))
 
             if not should_comment or comment_text == "[N/A]" or not comment_text:
                 print(f"Skipping comment for post: {post_id}, should_comment={should_comment}, text={comment_text}")
@@ -88,7 +89,7 @@ class ActionEngine:
                     results["comment_text"] = comment_text
                     self.record_interaction(post_id, "comments", {"text": comment_text})
 
-            # Bump scroll to help next post load correctly
+            # Scroll
             driver.execute_script("window.scrollBy(0, 400);")
             self._random_delay(1, 2)
 
@@ -98,6 +99,7 @@ class ActionEngine:
             results["errors"].append(error_msg)
 
         return results
+
 
     def like_post(self, driver, post_element):
         try:
