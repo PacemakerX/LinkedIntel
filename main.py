@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # Import project modules
 from config import HEADLESS_MODE, MAX_POSTS_TO_SCRAPE
 from core.auth import LinkedInAuth
-from core.feed_scraper import FeedScraper
+from core.feed_scrapper import FeedScraper
 from core.ai_filter import AIFilter
 from core.action_engine import ActionEngine
 
